@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  vscode-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vscode-remote-dev
+    volumes:
+      - vscode-workspace:/home/developer/workspace
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8069:8069" # VS Code web interface
+      - "2222:22" # SSH
+    environment:
+      - TZ=Etc/UTC
+      - PASSWORD=vscode # code-server password
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: '4'
+        reservations:
+          memory: 4G
+          cpus: '2'
+
+volumes:
+  vscode-workspace:

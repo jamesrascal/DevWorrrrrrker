@@ -1,72 +1,103 @@
-# Development Container with Roo Code and Data Tools
+# Ultimate VS Code Remote Development Environment
 
-This repository contains a development container configuration for VS Code that includes:
+This repository provides a complete remote development environment for VS Code where your local machine acts purely as a thin client. All development resources, data processing, and computation happen on the remote server, keeping your local machine free from heavy resource usage.
 
-- [Roo Code](https://github.com/RooVetGit/Roo-Code) - AI-powered autonomous coding agent
-- Tools for working with CSV, Parquet, SQLite, and PostgreSQL data
-- Mermaid diagram support
-- PDF viewer
+## Features
 
-## Prerequisites
+- Complete development environment with multiple programming languages and tools
+- Configured for data science, web development, and general software engineering
+- Pre-installed extensions for working with CSV, SQLite, Parquet, PostgreSQL, Mermaid diagrams, and more
+- Docker-in-Docker support for container-based development
+- Multiple connection options (SSH or web browser)
+- All data and processing stay on the remote server
 
-- [Docker](https://www.docker.com/products/docker-desktop) installed on your machine
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension for VS Code
+## Connection Options
 
-## Getting Started
+### Option 1: Remote-SSH Extension (Recommended)
 
-1. Open this project in VS Code
-2. When prompted, click "Reopen in Container"
-   - Alternatively, press F1 and select "Remote-Containers: Reopen in Container"
-3. Wait for the container to build (this may take several minutes the first time)
+1. Install the "Remote - SSH" extension in VS Code on your local machine
+2. Configure your SSH connection in VS Code:
+   ```
+   Host vscode-remote
+       HostName your-server-ip
+       User developer
+       Port 2222
+       Password vscode
+   ```
+3. Connect via "Remote-SSH: Connect to Host..." command
+4. When prompted, enter the password: `vscode`
 
-## Included Extensions
+### Option 2: Web Browser Interface
 
-### AI Coding Assistant
-- Roo Code (prev. Roo Cline) - A whole dev team of AI agents in your editor
+1. Navigate to `http://your-server-ip:8080` in any web browser
+2. When prompted, enter the password: `vscode`
 
-### Data Tools
-- Rainbow CSV - Colorizes CSV files for better readability
-- Data Preview - For viewing large data files
-- Parquet Visualizer - Inspect and query parquet files
-- Parquet Viewer - Views Apache Parquet files as JSON
-- SQLite Viewer - Explore and query SQLite databases
-- VSCode SQLite - SQLite database management
-- PostgreSQL - Integration with PostgreSQL databases
+## Deployment Instructions
 
-### Visualization
-- Markdown Preview Mermaid Support - Preview Mermaid diagrams in markdown
-- VSCode Mermaid Editor - Live editor for Mermaid diagrams
-- PDF Viewer - View PDF files directly in VS Code
+### Using Docker Compose (Recommended)
 
-### Development Tools
-- Python - Python language support
-- Pylance - Python language server
-- Jupyter - Jupyter notebook support
+1. Install Docker and Docker Compose on your server
+2. Clone this repository to your server
+3. Run:
+   ```bash
+   docker-compose up -d
+   ```
+4. Connect using one of the connection options above
 
-## Using the Container
+### Using Docker Directly
 
-All extensions run on the remote container, reducing resource usage on your local machine. The container includes:
+1. Install Docker on your server
+2. Clone this repository to your server
+3. Build the Docker image:
+   ```bash
+   docker build -t ultimate-vscode .
+   ```
+4. Run the container:
+   ```bash
+   docker run -d \
+     --name vscode-remote-dev \
+     -p 8080:8080 \
+     -p 2222:22 \
+     -v vscode-workspace:/home/developer/workspace \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     --restart unless-stopped \
+     ultimate-vscode
+   ```
+5. Connect using one of the connection options above
 
-- Python 3.10 with data science packages (pandas, numpy, matplotlib, etc.)
-- Node.js and npm with SQL formatter
-- PostgreSQL database
-- Docker-in-Docker support
+## Installed Tools and Languages
 
-## Project Structure
+- **Languages**: Python, Node.js, Go, Rust, Java, .NET
+- **Data Tools**: PostgreSQL, SQLite, Pandas, NumPy, DuckDB, PyArrow
+- **DevOps**: Docker, Git
+- **Shells**: Bash, Zsh (with Oh My Zsh)
+- **Editors**: Nano, Vim, VS Code Server
+- **Utilities**: tmux, htop, ripgrep, fzf
 
-```
-project-root/
-├── .devcontainer/     # Container configuration
-│   ├── devcontainer.json
-│   └── Dockerfile
-├── .vscode/           # VS Code settings
-│   └── settings.json
-├── data/              # Data storage
-│   ├── csv/           # CSV files
-│   ├── parquet/       # Parquet files
-│   └── sqlite/        # SQLite databases
-├── notebooks/         # Jupyter notebooks
-├── scripts/           # Python scripts
-└── README.md          # This file
-```
+## Recommended VS Code Extensions to Install
+
+Once connected to your remote environment, install these extensions:
+
+- **Roo Code** (RooVeterinaryInc.roo-cline)
+- **Rainbow CSV** (mechatroner.rainbow-csv)
+- **Data Preview** (RandomFractalsInc.vscode-data-preview)
+- **Parquet Visualizer** (lucien-martijn.parquet-visualizer)
+- **SQLite Viewer** (qwtel.sqlite-viewer)
+- **PostgreSQL** (ms-ossdata.vscode-postgresql)
+- **Markdown Preview Mermaid Support** (bierner.markdown-mermaid)
+- **PDF Viewer** (tomoki1207.pdf)
+
+## Security Notes
+
+- Default credentials are included for convenience but should be changed for production use
+- Consider setting up SSH key authentication instead of password-based authentication
+- Restrict access to the container's ports using a firewall
+- For enhanced security, configure TLS for the web interface
+
+## Resource Allocation
+
+By default, the container is configured with:
+- 8GB RAM limit (4GB guaranteed)
+- 4 CPU cores limit (2 cores guaranteed)
+
+Adjust these limits in the docker-compose.yml file based on your server's capabilities.

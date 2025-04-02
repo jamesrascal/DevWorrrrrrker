@@ -16,29 +16,22 @@
             "extensions": [
                 // Roo Code extension
                 "RooVeterinaryInc.roo-cline",
-                
                 // CSV and data handling
                 "mechatroner.rainbow-csv",
                 "RandomFractalsInc.vscode-data-preview",
-                
                 // Parquet tools
                 "lucien-martijn.parquet-visualizer",
                 "dvirtz.parquet-viewer",
-                
                 // SQLite tools
                 "qwtel.sqlite-viewer",
                 "alexcvzz.vscode-sqlite",
-                
                 // PostgreSQL
                 "ms-ossdata.vscode-postgresql",
-                
                 // Mermaid diagram support
                 "bierner.markdown-mermaid",
                 "tomoyukim.vscode-mermaid-editor",
-                
                 // PDF viewer
                 "tomoki1207.pdf",
-                
                 // Helpful related tools
                 "ms-python.python",
                 "ms-python.vscode-pylance",
