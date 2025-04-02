@@ -1,0 +1,42 @@
+{
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.rulers": [88, 120],
+    "editor.suggestSelection": "first",
+    "editor.tabSize": 4,
+    "files.trimTrailingWhitespace": true,
+    
+    // Python settings
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    
+    // Data file associations
+    "workbench.editorAssociations": {
+        "*.db": "sqlite-viewer.view",
+        "*.sqlite": "sqlite-viewer.view",
+        "*.sqlite3": "sqlite-viewer.view",
+        "*.parquet": "parquet-visualizer.view",
+        "*.pdf": "pdf.view"
+    },
+    
+    // CSV settings
+    "csv-preview.separator": ",",
+    "csv-preview.quoteMark": "\"",
+    "csv-preview.hasHeaders": true,
+    "csv-preview.resizeColumns": true,
+    
+    // Rainbow CSV settings
+    "rainbow_csv.rainbow_separator_background": false,
+    
+    // SQLite settings
+    "sqlite-viewer.sqlite.binaryPath": "/usr/bin/sqlite3",
+    
+    // Mermaid settings
+    "markdown-preview-enhanced.enableScriptExecution": false,
+    
+    // Roo Code settings
+    "roo-cline.customStoragePath": "${workspaceFolder}/.roocode"
+}

@@ -1,0 +1,68 @@
+{
+    "name": "Development Container with Roo Code and Data Tools",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        },
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.10"
+        },
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/postgresql:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Roo Code extension
+                "RooVeterinaryInc.roo-cline",
+                
+                // CSV and data handling
+                "mechatroner.rainbow-csv",
+                "RandomFractalsInc.vscode-data-preview",
+                
+                // Parquet tools
+                "lucien-martijn.parquet-visualizer",
+                "dvirtz.parquet-viewer",
+                
+                // SQLite tools
+                "qwtel.sqlite-viewer",
+                "alexcvzz.vscode-sqlite",
+                
+                // PostgreSQL
+                "ms-ossdata.vscode-postgresql",
+                
+                // Mermaid diagram support
+                "bierner.markdown-mermaid",
+                "tomoyukim.vscode-mermaid-editor",
+                
+                // PDF viewer
+                "tomoki1207.pdf",
+                
+                // Helpful related tools
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash"
+                    }
+                },
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.formatting.provider": "black",
+                "editor.formatOnSave": true,
+                "[python]": {
+                    "editor.formatOnSave": true
+                }
+            }
+        }
+    },
+    "postCreateCommand": "pip install pandas numpy matplotlib scipy seaborn pyarrow duckdb sqlalchemy psycopg2-binary && npm install -g sql-formatter",
+    "remoteUser": "vscode",
+    "runArgs": [
+        "--memory=8g"
+    ]
+}
